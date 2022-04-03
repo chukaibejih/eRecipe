@@ -51,7 +51,7 @@ class User(AbstractUser):
     username = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    is_organization = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
     is_verified = models.BooleanField(default=False)
 
     objects = CustomUserManager()
