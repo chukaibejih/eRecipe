@@ -41,7 +41,6 @@ class CustomUserManager(UserManager):
 
 class User(AbstractUser):
     """
-    A custom user of the eRecipe app.
 
     """
 

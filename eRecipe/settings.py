@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     
     'accounts.apps.AccountsConfig',
+    'services.apps.ServicesConfig'
 ]
 
 MIDDLEWARE = [
