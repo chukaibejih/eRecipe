@@ -1,8 +1,28 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import UserProfile
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from accounts.models import UserProfile
 
 User = get_user_model()
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    
+    """Overide default token login to include `user` data"""
+    def validate(self, attrs):
+        data = super().validate(attrs)
+        data.update({
+            "id": self.user.id,
+            "first_name": self.user.first_name,
+            "last_name": self.user.last_name,
+            "username": self.user.username,
+            "email": self.user.email,
+            "is_superuser": self.user.is_superuser,
+            "is_staff": self.user.is_staff,
+            "is_verified": self.user.is_verified
+        })
+
+        return data
 
 
 
@@ -13,6 +33,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         exclude = [
             "last_login",
             "date_joined",
+            "is_organization",
             "user_permissions",
             "groups"
         ]
@@ -26,8 +47,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         email = validated_data.pop("email")
         password = validated_data.pop("password")
-        username = validated_data.pop("username")
-        return User.objects.create_user(email, password, username, **validated_data)
+        return User.objects.create_user(email, password, **validated_data)
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
@@ -48,7 +68,6 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
             "email",
             "first_name",
             "last_name",
-            "username",
             "is_active",
             "is_verified",
             "user_profile",
@@ -60,3 +79,9 @@ class RetrieveUserSerializer(serializers.ModelSerializer):
 
         except:
             return None
+
+
+class ChangePasswordSerializer(serializers.Serializer):
+    
+    old_password = serializers.CharField(required=True)
+    new_password = serializers.CharField(required=True)
