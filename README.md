@@ -44,7 +44,7 @@ Visit /admin/ and login with credentials to have access to the admin dashboard.
 That's all! For the API Documentation, visit:
 
 SwaggerAPI: http://localhost:8000/
-ReDoc: http://localhost:8000/redoc/
+
 Testing Account
 Admin:
 email: admin@gmail.com
