@@ -11,7 +11,7 @@ from common import permissions as custom_permissions
 
 class CustomTokenObtainPairViewset(TokenObtainPairView):
     
-    """create: Login with email and password"""
+    # create: Login with email and password
     serializer_class = serializers.CustomTokenObtainPairSerializer
 
 
@@ -46,9 +46,8 @@ class UserViewset(viewsets.ModelViewSet):
 
 
 class ChangePasswordViewset(generics.CreateAPIView):
-    """
-    Change password
-    """
+
+    # Change password
 
     serializer_class = serializers.ChangePasswordSerializer
     queryset = User.objects.all()
@@ -69,9 +68,8 @@ class ChangePasswordViewset(generics.CreateAPIView):
 
 
 class UserProfileViewset(viewsets.ModelViewSet):
-    """
-    list all users
-    """
+    
+    # list all users
 
     serializer_class = serializers.UserProfileSerializer
     queryset = UserProfile.objects.all()

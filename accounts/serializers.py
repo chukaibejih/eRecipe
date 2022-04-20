@@ -8,7 +8,7 @@ User = get_user_model()
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     
-    """Overide default token login to include `user` data"""
+    # Overide default token login to include `user` data
     def validate(self, attrs):
         data = super().validate(attrs)
         data.update({

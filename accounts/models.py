@@ -53,9 +53,9 @@ class CustomUserManager(UserManager):
         
 
 class User(AbstractUser):
-    """
-    Custom User model
-    """
+
+    # Custom User model
+   
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=30)
@@ -76,10 +76,9 @@ class User(AbstractUser):
 
 
 class UserProfile(models.Model):
-    """
-    A user profile of the eRecipe app.
 
-    """
+    # A user profile of the eRecipe app.
+
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
